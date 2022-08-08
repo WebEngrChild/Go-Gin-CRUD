@@ -21,6 +21,7 @@ func UpdateRecipeHandler(c *gin.Context) {
 	}
 
 	// 更新するレシピのIndexをrecipesから探す
+	// インデックスが0の場合があるため-1
 	targetRecipeIndex := -1
 	for i := 0; i < len(recipes); i++ {
 		if recipes[i].ID == id {

@@ -14,5 +14,7 @@ func NewRoutes() *gin.Engine {
 	router.GET("/recipes", handlers.ListRecipesHandler)
 	// レシピの更新
 	router.PUT("/recipes/:id", handlers.UpdateRecipeHandler)
+	// レシピの削除
+	router.DELETE("/recipes/:id", handlers.DeleteRecipeHandler)
 	return router
 }
