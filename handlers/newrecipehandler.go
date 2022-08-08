@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"recipe-api/models"
 	"time"
@@ -9,12 +11,12 @@ import (
 	"github.com/rs/xid"
 )
 
-// 一時的なtmpDB
-// 将来的にはDatabaseに格納したい
 var recipes []models.Recipe
 
 func init() {
 	recipes = make([]models.Recipe, 0)
+	file, _ := ioutil.ReadFile("recipes.json")
+	_ = json.Unmarshal([]byte(file), &recipes)
 }
 
 func NewRecipeHandler(c *gin.Context) {
