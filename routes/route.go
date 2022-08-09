@@ -1,9 +1,8 @@
 package routes
 
 import (
-	"recipe-api/handlers"
-
 	"github.com/gin-gonic/gin"
+	"recipe-api/handlers"
 )
 
 func NewRoutes() *gin.Engine {

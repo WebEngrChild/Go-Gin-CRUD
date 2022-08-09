@@ -1,10 +1,9 @@
 package handlers
 
 import (
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"recipe-api/models"
-
-	"github.com/gin-gonic/gin"
 )
 
 func UpdateRecipeHandler(c *gin.Context) {

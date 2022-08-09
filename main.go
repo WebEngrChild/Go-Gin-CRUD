@@ -1,9 +1,12 @@
 // main.go
 package main
 
-import "recipe-api/routes"
+import (
+	"fmt"
+)
 
 func main() {
-	router := routes.NewRoutes()
-	router.Run()
+	fmt.Println("Hello golang from docker!")
+	//router := routes.NewRoutes()
+	//router.Run()
 }
