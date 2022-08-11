@@ -1,13 +1,24 @@
 CREATE DATABASE golang_db;
 use golang_db;
 
-CREATE TABLE users (
-                       id INT(11) AUTO_INCREMENT NOT NULL,
-                       name VARCHAR(64) NOT NULL,
-                       password CHAR(30) NOT NULL,
-                       PRIMARY KEY (id)
+CREATE TABLE companies (
+                        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                        name VARCHAR(255) NOT NULL
 );
 
-INSERT INTO users (name, password) VALUES ("gophar", "5555");
+CREATE TABLE departments (
+                         id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                         company_id TINYINT NOT NULL,
+                         name VARCHAR (255) NOT NULL
+);
 
-INSERT INTO users (name, password) VALUES ("octcat", "0000");
+CREATE TABLE grades (
+                             name VARCHAR (255) NOT NULL
+);
+
+CREATE TABLE employees (
+                            id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                            department_id TINYINT NOT NULL,
+                            position_id TINYINT NOT NULL,
+                            person_id TINYINT NOT NULL
+);
