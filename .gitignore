@@ -26,3 +26,10 @@ go.work
 
 # etc
 .DS_Store
+
+# air
+.air.toml
+tmp/
+
+# tempData
+/docker/mysql/data/
