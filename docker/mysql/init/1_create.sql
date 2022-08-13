@@ -2,25 +2,30 @@ CREATE DATABASE golang_db;
 use golang_db;
 
 CREATE TABLE companies (
-                        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                        id TINYINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                         name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE departments (
-                        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                        id TINYINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                         name VARCHAR (255) NOT NULL
 );
 
 CREATE TABLE persons (
-                         id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                         id TINYINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                          name VARCHAR (255) NOT NULL,
                          gender BOOLEAN,
                          birthday DATE,
                          phone VARCHAR (255)
 );
 
+CREATE TABLE branches (
+                          id TINYINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                          name VARCHAR (255) NOT NULL
+);
+
 CREATE TABLE employees (
-                        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                        id TINYINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                         person_id TINYINT NOT NULL,
                         company_id TINYINT NOT NULL,
                         department_id TINYINT NOT NULL,
@@ -29,11 +34,6 @@ CREATE TABLE employees (
                         FOREIGN KEY (company_id) REFERENCES companies(id),
                         FOREIGN KEY (department_id) REFERENCES departments(id),
                         FOREIGN KEY (branch_id) REFERENCES branches(id)
-);
-
-CREATE TABLE branches (
-                        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-                        name VARCHAR (255) NOT NULL
 );
 
 INSERT INTO persons (name, gender, birthday, phone)
