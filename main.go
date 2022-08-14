@@ -2,22 +2,17 @@
 package main
 
 import (
+	"database/sql"
+	"errors"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 	dotnet "github.com/joho/godotenv"
+	"log"
 	"os"
+	"recipe-api/models"
 )
 
 func main() {
-
-	type Persons struct {
-		Id       int    `gorm:"column:id"`
-		Name     string `gorm:"column:name"`
-		Gender   bool   `gorm:"column:gender"`
-		Birthday string `gorm:"column:birthday"`
-		Phone    string `gorm:"column:phone"`
-	}
 
 	db, err := sqlConnect()
 	if err != nil {
@@ -27,17 +22,10 @@ func main() {
 	}
 	defer db.Close()
 
-	var result []*Persons
-	dbErr := db.Find(&result).Error
-	if dbErr != nil || len(result) == 0 {
-		return
-	}
-	for _, user := range result {
-		fmt.Println(user.Name)
-		fmt.Println(user.Gender)
-		fmt.Println(user.Birthday)
-		fmt.Println(user.Phone)
-	}
+	p := &models.Person{}
+
+	getRows(db, p)
+	getSingleRow(db, p, 1)
 
 	// Ginの内容
 	//r := gin.Default()
@@ -52,7 +40,7 @@ func main() {
 	//router.Run()
 }
 
-func sqlConnect() (database *gorm.DB, err error) {
+func sqlConnect() (database *sql.DB, err error) {
 	err = dotnet.Load(".env")
 	if err != nil {
 		fmt.Printf("読み込みに失敗しました: %v", err)
@@ -63,7 +51,45 @@ func sqlConnect() (database *gorm.DB, err error) {
 	PASS := os.Getenv("DB_PASS")
 	PROTOCOL := "tcp(localhost:3306)"
 	DBNAME := os.Getenv("DB_NAME")
-
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
-	return gorm.Open(DBMS, CONNECT)
+
+	db, err := sql.Open(DBMS, CONNECT)
+	if err != nil {
+		log.Fatalf("main sql.Open error err:%v", err)
+	}
+
+	return db, nil
+}
+
+func getRows(db *sql.DB, p *models.Person) {
+	rows, err := db.Query("SELECT * FROM persons")
+	if err != nil {
+		log.Fatalf("getRows db.Query error err:%v", err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		if err := rows.Scan(&p.Id, &p.Name, &p.Gender, &p.Birthday, &p.Phone); err != nil {
+			log.Fatalf("getRows rows.Scan error err:%v", err)
+		}
+		fmt.Println(p)
+	}
+
+	err = rows.Err()
+	if err != nil {
+		log.Fatalf("getRows rows.Err error err:%v", err)
+	}
+}
+
+func getSingleRow(db *sql.DB, p *models.Person, id int) {
+	err := db.QueryRow("SELECT * FROM persons WHERE id = ?", id).
+		Scan(&p.Id, &p.Name, &p.Gender, &p.Birthday, &p.Phone)
+	if errors.Is(err, sql.ErrNoRows) {
+		fmt.Println("getSingleRow no records.")
+		return
+	}
+	if err != nil {
+		log.Fatalf("getSingleRow db.QueryRow error err:%v", err)
+	}
+	fmt.Println(p)
 }
