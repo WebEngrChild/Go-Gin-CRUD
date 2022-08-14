@@ -11,6 +11,7 @@ services:
       - mysql
 
   mysql:
+    container_name: mysql
     build: ./docker/mysql/
     volumes:
       # 初期データを投入するSQLが格納されているdir
@@ -18,7 +19,6 @@ services:
       # 永続化するときにマウントするdir
 #      - ./docker/mysql/data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=golang
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
     ports:
-      - "3306:3306"
-    container_name: mysql-container
+      - ${DB_PORT}:3306

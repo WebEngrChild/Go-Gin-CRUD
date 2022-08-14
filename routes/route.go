@@ -7,15 +7,15 @@ import (
 
 func NewRoutes() *gin.Engine {
 	router := gin.Default()
-	// レシピ作成
+	// 従業員データ登録
 	router.POST("/recipes", handlers.NewRecipeHandler)
-	// レシピ一覧の取得
+	// 従業員データ取得
 	router.GET("/recipes", handlers.ListRecipesHandler)
-	// レシピの更新
+	// 従業員データ更新
 	router.PUT("/recipes/:id", handlers.UpdateRecipeHandler)
-	// レシピの削除
+	// 従業員データ削除
 	router.DELETE("/recipes/:id", handlers.DeleteRecipeHandler)
-	// レシピの検索
+	// 従業員データの検索
 	router.GET("/recipes/search", handlers.SearchRecipesHandler)
 	return router
 }

@@ -1,5 +1,5 @@
-CREATE DATABASE golang_db;
-use golang_db;
+CREATE DATABASE golang;
+use golang;
 
 CREATE TABLE companies (
                         id TINYINT AUTO_INCREMENT NOT NULL PRIMARY KEY,

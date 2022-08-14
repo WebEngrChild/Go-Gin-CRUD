@@ -21,11 +21,10 @@
 # Go workspace file
 go.work
 
-# ide
-.idea/
-
 # etc
 .DS_Store
+.idea/
+.env
 
 # air
 .air.toml
