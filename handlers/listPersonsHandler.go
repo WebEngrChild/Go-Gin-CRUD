@@ -11,8 +11,9 @@ import (
 )
 
 func ListPersonsHandler(c *gin.Context) {
+	persons := make([]models.Person, 10)
 
-	c.JSON(http.StatusOK, recipes)
+	c.JSON(http.StatusOK, persons)
 }
 
 func getRows(db *sql.DB, p *models.Person) {

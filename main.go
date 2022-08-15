@@ -11,19 +11,23 @@ import (
 	"recipe-api/models"
 )
 
-func main() {
-	db, err := sqlConnect()
+var Db *sql.DB
+
+func init() {
+	var err error
+	Db, err = sqlConnect()
 	if err != nil {
 		panic(err.Error())
 	} else {
 		fmt.Println("DB接続成功")
 	}
-	defer db.Close()
+}
 
+func main() {
+	defer Db.Close()
 	p := &models.Person{}
-
-	getRows(db, p)
-	//getSingleRow(db, p, 1)
+	getRows(Db, p)
+	getSingleRow(Db, p, 1)
 
 	// Ginの内容
 	//r := gin.Default()
@@ -65,8 +69,7 @@ func getRows(db *sql.DB, p *models.Person) {
 		"JOIN employees AS e on p.id = e.person_id " +
 		"JOIN companies AS c on c.id = e.company_id " +
 		"JOIN departments AS d on d.id = e.department_id " +
-		"JOIN branches AS b on e.branch_id = b.id " +
-		"WHERE p.id = 1")
+		"JOIN branches AS b on e.branch_id = b.id ")
 
 	if err != nil {
 		log.Fatalf("getRows db.Query error err:%v", err)
@@ -86,15 +89,29 @@ func getRows(db *sql.DB, p *models.Person) {
 	}
 }
 
-//func getSingleRow(db *sql.DB, p *models.Person, id int) {
-//	err := db.QueryRow("SELECT * FROM persons WHERE id = ?", id).
-//		Scan(&p.Id, &p.Name, &p.Gender, &p.Birthday, &p.Phone)
-//	if errors.Is(err, sql.ErrNoRows) {
-//		fmt.Println("getSingleRow no records.")
-//		return
-//	}
-//	if err != nil {
-//		log.Fatalf("getSingleRow db.QueryRow error err:%v", err)
-//	}
-//	fmt.Println(p)
-//}
+func getSingleRow(db *sql.DB, p *models.Person, id int) {
+	rows, err := db.Query("SELECT p.id, p.name, p.gender, p.birthday, p.phone, c.name AS company, d.name AS department, b.name AS branch "+
+		"FROM golang.persons AS p "+
+		"JOIN employees AS e on p.id = e.person_id "+
+		"JOIN companies AS c on c.id = e.company_id "+
+		"JOIN departments AS d on d.id = e.department_id "+
+		"JOIN branches AS b on e.branch_id = b.id "+
+		"WHERE p.id = ?", id)
+
+	if err != nil {
+		log.Fatalf("getRows db.Query error err:%v", err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		if err := rows.Scan(&p.Id, &p.Name, &p.Gender, &p.Birthday, &p.Phone, &p.Company, &p.Department, &p.Branch); err != nil {
+			log.Fatalf("getRows rows.Scan error err:%v", err)
+		}
+		fmt.Println(p)
+	}
+
+	err = rows.Err()
+	if err != nil {
+		log.Fatalf("getRows rows.Err error err:%v", err)
+	}
+}
