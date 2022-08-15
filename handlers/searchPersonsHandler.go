@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SearchRecipesHandler(c *gin.Context) {
+func SearchPersonsHandler(c *gin.Context) {
 	// リクエストからtagを取得する
 	// ?tag=XXXXの様に指定するだけで値を取得可能
 	tag := c.Query("tag")

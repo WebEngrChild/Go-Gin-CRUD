@@ -75,3 +75,11 @@ VALUES (1, 1, 1, 2),
        (4, 4, 4, 3),
        (5, 4, 3, 1),
        (6, 1, 3, 1);
+
+SELECT p.id, p.name, p.gender, p.birthday, p.phone, c.name AS company, d.name AS department, b.name AS branch
+FROM golang.persons AS p
+JOIN employees AS e on p.id = e.person_id
+JOIN companies AS c on c.id = e.company_id
+JOIN departments AS d on d.id = e.department_id
+JOIN branches AS b on e.branch_id = b.id
+WHERE p.id = 1;
