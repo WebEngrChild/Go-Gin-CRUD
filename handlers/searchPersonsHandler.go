@@ -11,10 +11,6 @@ import (
 func SearchPersonsHandler(c *gin.Context) {
 
 	id := c.Query("id")
-	name := c.Query("name")
-	company := c.Query("company")
-	department := c.Query("department")
-	branch := c.Query("branch")
 
 	rows, err := util.Db.Query("SELECT p.id AS id, p.name AS name, p.gender AS gender, p.birthday as birthday, p.phone AS phone, c.name AS company, d.name AS department, b.name AS branch "+
 		"FROM golang.persons AS p "+
@@ -22,15 +18,7 @@ func SearchPersonsHandler(c *gin.Context) {
 		"JOIN companies AS c on c.id = e.company_id "+
 		"JOIN departments AS d on d.id = e.department_id "+
 		"JOIN branches AS b on e.branch_id = b.id "+
-		"WHERE p.id = ? "+
-		"OR "+
-		"p.name = ? "+
-		"OR "+
-		"c.name = ? "+
-		"OR "+
-		"d.name = ? "+
-		"OR "+
-		"b.name = ? ", id, name, company, department, branch)
+		"WHERE p.id = ?", id)
 
 	if err != nil {
 		log.Fatalf("SearchPersonsHandler db.Query error err:%v", err)
