@@ -19,21 +19,21 @@ func ListPersonsHandler(c *gin.Context) {
 		"JOIN branches AS b on e.branch_id = b.id ")
 
 	if err != nil {
-		log.Fatalf("getRows db.Query error err:%v", err)
+		log.Fatalf("ListPersonsHandler db.Query error err:%v", err)
 	}
 	defer rows.Close()
 
 	for rows.Next() {
 		p := &models.Person{}
 		if err := rows.Scan(&p.Id, &p.Name, &p.Gender, &p.Birthday, &p.Phone, &p.Company, &p.Department, &p.Branch); err != nil {
-			log.Fatalf("getRows rows.Scan error err:%v", err)
+			log.Fatalf("ListPersonsHandler rows.Scan error err:%v", err)
 		}
 		persons = append(persons, p)
 	}
 
 	err = rows.Err()
 	if err != nil {
-		log.Fatalf("getRows rows.Err error err:%v", err)
+		log.Fatalf("ListPersonsHandler rows.Err error err:%v", err)
 	}
 
 	c.JSON(http.StatusOK, persons)
