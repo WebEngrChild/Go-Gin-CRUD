@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "Name": "鈴木一郎",
+    "Gender": false,
+    "Birthday": "1993-12-31T00:00:00+09:00",
+    "Phone": "090-9999-8888",
+    "Company": "アップル株式会社",
+    "Department": "営業部",
+    "Branch": "大阪"
+  },
+  {
+    "Id": 2,
+    "Name": "田中太郎",
+    "Gender": false,
+    "Birthday": "1989-01-20T00:00:00+09:00",
+    "Phone": "080-7777-8888",
+    "Company": "グレープ株式会社",
+    "Department": "マーケティング部",
+    "Branch": "仙台"
+  },
+  {
+    "Id": 3,
+    "Name": "佐藤優作",
+    "Gender": false,
+    "Birthday": "1978-06-16T00:00:00+09:00",
+    "Phone": "080-6666-8888",
+    "Company": "アップル株式会社",
+    "Department": "研究開発部",
+    "Branch": "愛知"
+  },
+  {
+    "Id": 4,
+    "Name": "加藤美玲",
+    "Gender": true,
+    "Birthday": "2000-05-02T00:00:00+09:00",
+    "Phone": "080-5555-8888",
+    "Company": "メロン株式会社",
+    "Department": "研究開発部",
+    "Branch": "愛知"
+  },
+  {
+    "Id": 5,
+    "Name": "山本美月",
+    "Gender": true,
+    "Birthday": "1999-08-08T00:00:00+09:00",
+    "Phone": "080-4444-8888",
+    "Company": "メロン株式会社",
+    "Department": "経理財務部",
+    "Branch": "東京"
+  },
+  {
+    "Id": 6,
+    "Name": "井上由美",
+    "Gender": true,
+    "Birthday": "1978-06-18T00:00:00+09:00",
+    "Phone": "080-3333-8888",
+    "Company": "アップル株式会社",
+    "Department": "経理財務部",
+    "Branch": "東京"
+  }
+]

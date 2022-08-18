@@ -10,10 +10,16 @@ import (
 )
 
 func main() {
+	SetupServer()
+}
+
+func SetupServer() *gin.Engine {
 	defer util.Db.Close()
 
 	r := gin.Default()
 	r.Run(":3000")
 	router := routes.NewRoutes()
 	router.Run()
+
+	return r
 }
