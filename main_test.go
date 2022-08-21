@@ -6,15 +6,14 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"recipe-api/models"
-	"reflect"
+	"recipe-api/routes"
 	"testing"
 )
 
 func TestHomeHandler(t *testing.T) {
 	// テスト用のサーバーを立てる
-	ts := httptest.NewServer(SetupServer())
+	ts := httptest.NewServer(routes.NewRoutes())
 	defer ts.Close()
 
 	// リクエストを送れるか?
@@ -30,26 +29,30 @@ func TestHomeHandler(t *testing.T) {
 	}
 
 	// 期待した通りのレコード数なのか?
-	responseData, _ := ioutil.ReadAll(resp.Body)
-	length := len(string(responseData))
-	if length != 6 {
-		t.Fatalf("Expected lengh 6, got %v", responseData)
-	}
+	respArr, _ := ioutil.ReadAll(resp.Body)
 
-	// 期待した通りのレスポンスなのか?
-	raw, err := ioutil.ReadFile("./testResponse.json")
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-
-	var mr []models.Person
 	var r []models.Person
+	json.Unmarshal(respArr, &r)
+	length := len(r)
 
-	json.Unmarshal(raw, &mr)
-	json.Unmarshal(responseData, &r)
-
-	if reflect.DeepEqual(mr, r) {
-		t.Fatalf("Expected hello world message, got %v", responseData)
+	if length != 6 {
+		t.Fatalf("Expected lengh 6, got %v", respArr)
 	}
+
+	//// 期待した通りのレスポンスなのか?
+	//raw, err := ioutil.ReadFile("./testResponse.json")
+	//if err != nil {
+	//	fmt.Println(err.Error())
+	//	os.Exit(1)
+	//}
+	//
+	//var mr []models.Person
+	//var r []models.Person
+	//
+	//json.Unmarshal(raw, &mr)
+	//json.Unmarshal(respArr, &r)
+	//
+	//if reflect.DeepEqual(mr, r) {
+	//	t.Fatalf("Expected hello world message, got %v", respArr)
+	//}
 }
