@@ -6,8 +6,10 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"recipe-api/models"
 	"recipe-api/routes"
+	"reflect"
 	"testing"
 )
 
@@ -39,20 +41,17 @@ func TestHomeHandler(t *testing.T) {
 		t.Fatalf("Expected lengh 6, got %v", respArr)
 	}
 
-	//// 期待した通りのレスポンスなのか?
-	//raw, err := ioutil.ReadFile("./testResponse.json")
-	//if err != nil {
-	//	fmt.Println(err.Error())
-	//	os.Exit(1)
-	//}
-	//
-	//var mr []models.Person
-	//var r []models.Person
-	//
-	//json.Unmarshal(raw, &mr)
-	//json.Unmarshal(respArr, &r)
-	//
-	//if reflect.DeepEqual(mr, r) {
-	//	t.Fatalf("Expected hello world message, got %v", respArr)
-	//}
+	// 期待した通りのレスポンスなのか?
+	raw, err := ioutil.ReadFile("./testResponse.json")
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
+	var mr []models.Person
+	json.Unmarshal(raw, &mr)
+
+	if reflect.DeepEqual(mr, r) {
+		t.Fatalf("Expected hello world message, got %v", respArr)
+	}
 }
