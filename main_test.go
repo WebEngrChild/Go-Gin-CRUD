@@ -9,7 +9,6 @@ import (
 	"os"
 	"recipe-api/models"
 	"recipe-api/routes"
-	"reflect"
 	"testing"
 )
 
@@ -51,7 +50,7 @@ func TestHomeHandler(t *testing.T) {
 	var mr []models.Person
 	json.Unmarshal(raw, &mr)
 
-	if reflect.DeepEqual(mr, r) {
-		t.Fatalf("Expected hello world message, got %v", respArr)
+	if &mr == &r {
+		t.Fatalf("Expected hello world message, got %v", mr)
 	}
 }
