@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"recipe-api/handlers"
+	"go-gin-crud/handlers"
 )
 
 func NewRoutes() *gin.Engine {

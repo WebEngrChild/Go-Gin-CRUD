@@ -14,3 +14,8 @@ $ go run main.go
 # テスト実行
 $ go test
 ```
+
+## 採用技術補足
+
+- [Gin Web Framework](https://gin-gonic.com/ja/docs/)
+- [Air](https://github.com/cosmtrek/air) ※`yarn run watch`的なホットリロード機能

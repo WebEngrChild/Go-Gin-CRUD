@@ -1,4 +1,4 @@
-module recipe-api
+module go-gin-crud
 
 go 1.18
 

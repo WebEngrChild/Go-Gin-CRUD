@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"recipe-api/models"
-	"recipe-api/util"
+	"go-gin-crud/models"
+	"go-gin-crud/util"
 )
 
 func ListPersonsHandler(c *gin.Context) {
