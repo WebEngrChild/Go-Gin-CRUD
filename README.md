@@ -15,7 +15,12 @@ $ go run main.go
 $ go test
 ```
 
-## 採用技術補足
+## ライブラリ補足
 
 - [Gin Web Framework](https://gin-gonic.com/ja/docs/)
-- [Air](https://github.com/cosmtrek/air) ※`yarn run watch`的なホットリロード機能
+  - 軽量webフレームワーク
+  - 本アプリではルーティング設定で利用
+
+- [Air](https://github.com/cosmtrek/air)
+  - ホットリロード機能
+  - フロント開発でいう`yarn run watch`的なもの

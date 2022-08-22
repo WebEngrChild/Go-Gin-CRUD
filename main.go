@@ -3,8 +3,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"recipe-api/routes"
-	"recipe-api/util"
+	"go-gin-crud/routes"
+	"go-gin-crud/util"
 
 	_ "github.com/go-sql-driver/mysql"
 )
