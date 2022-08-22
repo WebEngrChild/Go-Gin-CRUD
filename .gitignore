@@ -27,7 +27,6 @@ go.work
 .env
 
 # air
-.air.toml
 tmp/
 
 # tempData
