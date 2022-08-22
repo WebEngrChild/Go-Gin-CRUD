@@ -26,6 +26,19 @@ http://localhost:8080/persons/search?id=1 => 従業員ID検索
 
 ![ER drawio](https://user-images.githubusercontent.com/87892265/186024337-59297a53-7e48-444a-bd7e-a8bb46004049.svg)
 
+## ディレクトリ概要
+
+```
+root/
+　├ .docker/
+　├ controller/
+　├ models/
+　├ routes/
+　├ util/
+　└  ..etc.
+
+```
+
 ## Golandデバッグ設定
 
 - 任意の箇所にブレイクポイントを設定する
