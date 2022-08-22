@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
-	"recipe-api/models"
-	"recipe-api/routes"
 	"testing"
+
+	"go-gin-crud/models"
+	"go-gin-crud/routes"
 )
 
 func TestHomeHandler(t *testing.T) {

@@ -1,11 +1,12 @@
 package handlers
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"go-gin-crud/models"
 	"go-gin-crud/util"
-	"log"
-	"net/http"
 )
 
 func SearchPersonsHandler(c *gin.Context) {
