@@ -30,4 +30,4 @@ go.work
 tmp/
 
 # tempData
-/docker/mysql/data/
+/.docker/mysql/data/

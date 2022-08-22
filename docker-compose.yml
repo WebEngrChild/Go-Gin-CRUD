@@ -1,7 +1,7 @@
 version: "3" # composeファイルのバージョン
 services:
   app: # サービス名
-    build: ./docker/go/ # ビルドに使うDockerfileの場所
+    build: ./.docker/go/ # ビルドに使うDockerfileの場所
     tty: true # コンテナの永続化
     ports: # ホストOSのポートとコンテナのポートをつなげる
       - "3000:3000"
@@ -12,7 +12,7 @@ services:
 
   mysql:
     container_name: mysql
-    build: ./docker/mysql/
+    build: ./.docker/mysql/
     volumes:
       # 初期データを投入するSQLが格納されているdir
       - ./docker/mysql/init:/docker-entrypoint-initdb.d

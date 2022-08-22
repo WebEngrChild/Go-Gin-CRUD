@@ -2,14 +2,14 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-gin-crud/handlers"
+	"go-gin-crud/controller"
 )
 
 func NewRoutes() *gin.Engine {
 	router := gin.Default()
 	// 従業員データ取得
-	router.GET("/persons", handlers.ListPersonsHandler)
+	router.GET("/persons", controller.ListPersonsHandler)
 	// 従業員データの検索
-	router.GET("/persons/search", handlers.SearchPersonsHandler)
+	router.GET("/persons/search", controller.SearchPersonsHandler)
 	return router
 }
