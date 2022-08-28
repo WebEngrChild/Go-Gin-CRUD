@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"reflect"
 	"testing"
 
 	"go-gin-crud/models"
@@ -51,7 +52,7 @@ func TestHomeHandler(t *testing.T) {
 	var mr []models.Person
 	json.Unmarshal(raw, &mr)
 
-	if &mr == &r {
-		t.Fatalf("Expected hello world message, got %v", mr)
+	if !reflect.DeepEqual(r, mr) {
+		t.Fatalf("Expected Response, got %v but actualy got %v", mr, r)
 	}
 }
